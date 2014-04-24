@@ -74,29 +74,12 @@ describe Map do
 			atx = map.get_city("Austin")
 			dal = map.get_city("Dallas")
 			hou = map.get_city("Houston")
-			# binding.pry
 
 			expect(atx.roads).to eq({"Dallas" => 300, "Houston" => 150})
 			expect(dal.roads).to eq({"Austin" => 300})
 			expect(hou.roads).to eq({"Austin" => 150})
 		end
 	end
-
-	# describe "#get_road" do
-	# 	it "gets a city object from the cities hash" do
-	# 		map.add_city("Austin")
-	# 		map.add_city("Dallas")
-	# 		map.add_city("Houston")
-	# 		map.add_road("Austin", "Dallas", 300)
-	# 		map.add_road("Austin", "Houston", 150)
-
-	# 		atx_dal_road = map.get_road("Austin", "Dallas")
-	# 		hou_atx_road = map.get_road("Austin", "Dallas")
-
-	# 		expect(atx_dal_road).to eq({"Dallas" => 300})
-	# 		expect(hou_atx_road).to eq({"Austin" => 150})
-	# 	end
-	# end
 
 	describe "#remove_road" do
 		it "can delete a road" do
@@ -131,21 +114,14 @@ describe Map do
 	    map.add_road("Atlanta", "Ottowa", 200)
 	    map.add_road("Atlanta", "Marfa", 300)
 	    map.add_road("Podunk", "Marfa", 400)
-	    map.add_road("Nola", "Marfa", 300)
+	    map.add_road("Nola", "Marfa", 400)
 	    map.add_road("Nola", "Berlin", 300)
 	    map.add_road("Marfa", "Ottowa", 1000)
 	    map.add_road("Berlin", "Ottowa", 1000)
 
-			# atl = map.get_city("Atlanta")
-			# pod = map.get_city("Podunk")
-			# ott = map.get_city("Ottowa")
-			# mar = map.get_city("Marfa")
-			# nol = map.get_city("Nola")
-			# ber = map.get_city("Berlin")
-
 			result = map.shortest_path("Atlanta", "Berlin")
 
-	    expect(result).to eq({"Berlin" => 1000})
+	    expect(result).to eq(1000)
 		end
 	end
 end

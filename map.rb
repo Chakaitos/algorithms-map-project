@@ -27,10 +27,6 @@ class Map
     destination_city.add_road(origin, distance)
   end
 
-  # def get_road(origin, destination)
-  #   @cities[origin].roads(destination)
-  # end
-
   def remove_road(origin, destination)
     origin_city = @cities[origin]
     destination_city = @cities[destination]
@@ -41,11 +37,33 @@ class Map
 
   # More methods here
   def shortest_path(origin, destination)
+    city_name = origin
     origin_city = @cities[origin]
     destination_city = @cities[destination]
 
-    discovered_cities = {}
+    discovered_cities = {origin => 0}
     solved_cities = {}
+
+    while discovered_cities != {}
+      @cities[city_name].roads.each do |k, v|
+        if discovered_cities[k] == nil
+          if solved_cities[k] == nil
+            discovered_cities[k] =  v
+          end
+        elsif discovered_cities[city_name] + v < discovered_cities[k] 
+          discovered_cities[k] = discovered_cities[city_name] + v
+        end
+      end
+      solved_cities[city_name] = discovered_cities[city_name]
+      discovered_cities.delete(city_name)
+      # we sort the discovered_cities and set the city with the nearest
+      # distance to a variable that we later use as the new origin city
+      if discovered_cities != {}
+        sorted_cities = discovered_cities.sort_by { |k, v| v }
+        city_name = sorted_cities[0][0]
+      end
+    end
+    solved_cities[destination]
   end
 end
 
