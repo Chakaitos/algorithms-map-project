@@ -11,19 +11,42 @@ class Map
     end
   end
 
+  def get_city(name)
+    @cities[name]
+  end
+
   def remove_city(name)
+    @cities.delete(name)
   end
 
   def add_road(origin, destination, distance)
-    @cities[origin].add_road(destination, distance)
-    @cities[destination].add_road(origin, distance)
+    origin_city = @cities[origin]
+    destination_city = @cities[destination]
+
+    origin_city.add_road(destination, distance)
+    destination_city.add_road(origin, distance)
   end
 
+  # def get_road(origin, destination)
+  #   @cities[origin].roads(destination)
+  # end
+
   def remove_road(origin, destination)
+    origin_city = @cities[origin]
+    destination_city = @cities[destination]
+
+    origin_city.roads.delete(destination)
+    destination_city.roads.delete(origin)
   end
 
   # More methods here
+  def shortest_path(origin, destination)
+    origin_city = @cities[origin]
+    destination_city = @cities[destination]
 
+    discovered_cities = {}
+    solved_cities = {}
+  end
 end
 
 class City
